@@ -5,6 +5,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net"
+	"errors"
 	"net/http"
 	"time"
 
@@ -47,7 +48,8 @@ func (c *Client) Do(req *http.Request) ([]byte, error) {
 	}
 
 	if res.StatusCode != 200 {
-		logrus.Fatalf("Status: %s", res.Status)
+		logrus.Errorf("Status: %s", res.Status)
+		return nil, errors.New("Status: %s", res.Status)
 	}
 
 	body, readErr := ioutil.ReadAll(res.Body)
