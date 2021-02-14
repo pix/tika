@@ -49,7 +49,7 @@ func (c *Client) Do(req *http.Request) ([]byte, error) {
 
 	if res.StatusCode != 200 {
 		logrus.Errorf("Status: %s", res.Status)
-		return nil, errors.New("Status: %s", res.Status)
+		return nil, errors.New(fmt.Sprintf("Status: %s", res.Status))
 	}
 
 	body, readErr := ioutil.ReadAll(res.Body)
